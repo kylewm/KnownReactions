@@ -1,0 +1,228 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "637fd4b050aee0d194fb6dfb2bb99a7a",
+    "packages": [
+        {
+            "name": "barnabywalters/mf-cleaner",
+            "version": "v0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barnabywalters/php-mf-cleaner.git",
+                "reference": "ef6a16628db6e8aee2b4f8bb8093d18c24b74cd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barnabywalters/php-mf-cleaner/zipball/ef6a16628db6e8aee2b4f8bb8093d18c24b74cd4",
+                "reference": "ef6a16628db6e8aee2b4f8bb8093d18c24b74cd4",
+                "shasum": ""
+            },
+            "require-dev": {
+                "php": ">=5.3",
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "mf2/mf2": "To parse microformats2 structures from (X)HTML"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/BarnabyWalters/Mf2/Functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barnaby Walters",
+                    "email": "barnaby@waterpigs.co.uk"
+                }
+            ],
+            "description": "Cleans up microformats2 array structures",
+            "time": "2014-10-06 23:11:15"
+        },
+        {
+            "name": "indieweb/comments",
+            "version": "0.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/indieweb/php-comments.git",
+                "reference": "804e3863ca58edc7c1897d3f1d11f7d086636886"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/indieweb/php-comments/zipball/804e3863ca58edc7c1897d3f1d11f7d086636886",
+                "reference": "804e3863ca58edc7c1897d3f1d11f7d086636886",
+                "shasum": ""
+            },
+            "require": {
+                "tantek/cassis": "0.1.16124"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/indieweb/comments.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Parecki",
+                    "homepage": "http://aaronparecki.com"
+                }
+            ],
+            "keywords": [
+                "comments",
+                "indieweb"
+            ],
+            "time": "2015-10-06 16:23:56"
+        },
+        {
+            "name": "mf2/mf2",
+            "version": "v0.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/indieweb/php-mf2.git",
+                "reference": "6701504876d6c9242eb310b35f41d40d9785ab4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/6701504876d6c9242eb310b35f41d40d9785ab4e",
+                "reference": "6701504876d6c9242eb310b35f41d40d9785ab4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "barnabywalters/mf-cleaner": "To more easily handle the canonical data php-mf2 gives you"
+            },
+            "bin": [
+                "bin/fetch-mf2",
+                "bin/parse-mf2"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Mf2/Parser.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barnaby Walters",
+                    "homepage": "http://waterpigs.co.uk"
+                }
+            ],
+            "description": "A pure, generic microformats2 parser — makes HTML as easy to consume as a JSON API",
+            "keywords": [
+                "html",
+                "microformats",
+                "microformats 2",
+                "parser",
+                "semantic"
+            ],
+            "time": "2015-07-12 14:10:01"
+        },
+        {
+            "name": "mf2/shim",
+            "version": "v0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/indieweb/php-mf2-shim.git",
+                "reference": "8a72b720bf60f0d5ceb2edf2b5e2ffc9f252bf1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/indieweb/php-mf2-shim/zipball/8a72b720bf60f0d5ceb2edf2b5e2ffc9f252bf1c",
+                "reference": "8a72b720bf60f0d5ceb2edf2b5e2ffc9f252bf1c",
+                "shasum": ""
+            },
+            "require": {
+                "mf2/mf2": "~0.2.6",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Mf2/functions.php",
+                    "Mf2/Shim/Twitter.php",
+                    "Mf2/Shim/Instagram.php",
+                    "Mf2/Shim/Facebook.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barnaby Walters",
+                    "homepage": "http://waterpigs.co.uk"
+                },
+                {
+                    "name": "Aaron Parecki",
+                    "homepage": "http://aaronparecki.com"
+                }
+            ],
+            "description": "A parsing library for parsing pages from a few common non-mf2 sites into the mf2 structure",
+            "keywords": [
+                "instagram",
+                "microformats",
+                "microformats 2",
+                "parser",
+                "semantic",
+                "twitter"
+            ],
+            "time": "2014-04-29 17:50:56"
+        },
+        {
+            "name": "tantek/cassis",
+            "version": "v0.1.16124",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tantek/cassis.git",
+                "reference": "b9ec7142179950010c896ec3894aece0a56b0029"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tantek/cassis/zipball/b9ec7142179950010c896ec3894aece0a56b0029",
+                "reference": "b9ec7142179950010c896ec3894aece0a56b0029",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "cassis-loader.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2014-02-18 20:17:32"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
