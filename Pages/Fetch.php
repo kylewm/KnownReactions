@@ -30,13 +30,14 @@ namespace IdnoPlugins\IndieReactions\Pages {
                     ];
                 }
                 $name = \BarnabyWalters\Mf2\getPlaintext($hentry, 'name');
-                $content = \BarnabyWalters\Mf2\getPlaintext($hentry, 'content');
+                $content_plain = \BarnabyWalters\Mf2\getPlaintext($hentry, 'content');
+                $content_html = \BarnabyWalters\Mf2\getHtml($hentry, 'content');
 
-                if (strstr($name, $content) || strstr($content, $name)) {
+                if (strstr($name, $content_plain) || strstr($content_plain, $name)) {
                     $name = false;
                 }
 
-                $t->content = $content;
+                $t->content = $content_html;
                 $t->name = $name;
             }
             // let's try OGP and Twitter cards

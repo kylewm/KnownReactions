@@ -1,9 +1,9 @@
 <?php
 
-    namespace IdnoPlugins\IndieReactions\Pages\IndieLike {
+    namespace IdnoPlugins\IndieReactions\Pages\IndieRepost {
 
         use Idno\Core\Idno;
-        use IdnoPlugins\IndieReactions\IndieLike;
+        use IdnoPlugins\IndieReactions\IndieRepost;
         
         class Edit extends \Idno\Common\Page {
 
@@ -12,13 +12,13 @@
                 $this->createGatekeeper();
 
                 if (!empty($this->arguments)) {
-                    $title = 'Edit Like';
-                    $object = IndieLike::getByID($this->arguments[0]);
+                    $title = 'Edit Repost';
+                    $object = IndieRepost::getByID($this->arguments[0]);
                 } else {
-                    $title = 'New Like';
-                    $object = new IndieLike();
+                    $title = 'New Repost';
+                    $object = new IndieRepost();
                 }
-                
+
                 if ($owner = $object->getOwner()) {
                     $this->setOwner($owner);
                 }
@@ -36,7 +36,7 @@
             }
 
             function postContent() {
-                $object = new \IdnoPlugins\IndieReactions\IndieLike();
+                $object = new IndieRepost();
                 if ($object->saveDataFromInput($this)) {
                     $forward = $this->getInput('forward-to', $object->getDisplayURL());
                     $this->forward($forward);

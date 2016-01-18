@@ -1,7 +1,11 @@
 <?php
 
-$likeof = $vars['object']->likeof;
+$object = $vars['object'];
+$is_like = $object instanceof \IdnoPlugins\IndieReactions\IndieLike;
+$target = $is_like ? $object->likeof : $object->repostof;
 $desc = $vars['object']->description;
+$body = $vars['object']->body;
+$body_id = 'body'.rand(0,9999);
 
 ?>
 
@@ -10,21 +14,13 @@ $desc = $vars['object']->description;
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2 edit-pane">
-            <h4>                
-                <?php
-                if (empty($vars['object']->_id)) {
-                    echo 'New Like';
-                } else {
-                    echo 'Edit Like';
-                }
-                ?>
-            </h4>
+            <h4><?= $vars['title'] ?></h4>
 
             <div class="content-form">
 
-                <label for="likeof">URL</label>
-                <input required class="form-control" type="url" name="likeof" id="likeof"
-                       placeholder="http://..." value="<?= $likeof ?>" />
+                <label for="target">URL</label>
+                <input required class="form-control" type="url" name="target" id="target"
+                       placeholder="http://..." value="<?= $target ?>" />
 
                 <div id="description-spinner-container">
                     <div class="spinner" id="description-spinner" style="display:none">
@@ -35,8 +31,18 @@ $desc = $vars['object']->description;
                 </div>
                 
                 <div id="description-container">
-                  <label for="description">Description</label>
-                  <input required class="form-control" type="text" name="description" id="description" value="<?= $desc ?>"/>
+                    <label for="description">Description</label>
+                    <input required class="form-control" type="text" name="description" id="description" value="<?= $desc ?>"/>
+                    <?php
+                    if (!$is_like) {
+                        echo "<label for=\"$body_id\">Body</label>";
+                        echo $this->__([
+                            'name' => 'body',
+                            'unique_id' => $body_id,
+                            'value' => $body,
+                        ])->draw('forms/input/richtext');
+                    }
+                    ?>
                 </div>       
             </div>
        
@@ -58,30 +64,35 @@ $desc = $vars['object']->description;
      if ($("#description").val() == '') {
          $('#description-container').hide();
      }     
-     $('#likeof').change(function () {
+     $('#target').change(function () {
          var url = $(this).val();
          if (url != '') {
              $('#description-spinner').show();
              
              var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>indiereactions/fetch";
              $.get(endpoint, {"url": url}, function success(result) {
-                 var desc = '';
+                 var desc = '', body = '';
                  if (result.author && result.author.name) {
                      desc += result.author.name.trim() + "'s ";
                  }
-
                  if (result.name) {
                      var title = result.name.trim().replace(/\s{2,}/g, ' ');
                      desc += title;
                  } else if (url.contains('twitter.com')) {
-                     if (!desc) { desc += 'a '; }
+                     if (desc == '') { desc += 'a '; }
                      desc += 'tweet';
                  } else {
-                     if (!desc) { desc += 'a '; }
+                     if (desc == '') { desc += 'a '; }
                      desc += 'post on ' + url.replace(/^\w+:\/+([^\/]+).*/, '$1');;
                  }
 
+                 if (result.content) {
+                     body = result.content;
+                 }
+
                  $('#description').val(desc);
+                 $('#<?= $body_id ?>').val(body);
+
                  $('#description-spinner').hide();
                  $('#description-container').show();
              });
