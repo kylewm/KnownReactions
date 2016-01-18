@@ -1,14 +1,14 @@
 <?php
 
-    namespace IdnoPlugins\IndieReactions {
+    namespace IdnoPlugins\Reactions {
 
         use Idno\Core\Idno;
 
-        class IndieLike extends \Idno\Common\Entity {
+        class Repost extends \Idno\Common\Entity {
 
             function getTitle()
             {
-                $result = 'Liked ';
+                $result = 'Repost of ';
                 if (!empty($this->description)) {
                     $result .= $this->description;
                 }
@@ -17,7 +17,7 @@
             
             function getActivityStreamsObjectType()
             {
-                return 'like';
+                return 'share';
             }
 
             function saveDataFromInput($page)
@@ -28,8 +28,9 @@
                     $new = false;
                 }
 
-                $this->likeof = $page->getInput('target');
+                $this->repostof = $page->getInput('target');
                 $this->description = $page->getInput('description');
+                $this->body = $page->getInput('body');
                 $this->setAccess($page->getInput('access'));
                 $this->save($new);
                 return true;
@@ -40,8 +41,8 @@
                 // generate our own meaningful, unique(ish) slug
                 if (!$this->getSlug() && empty($this->_id)
                       && !empty($title = $this->getTitle())
-                      && !empty($this->likeof)) {
-                    $this->setSlugResilient($title . '-' . substr(md5($this->likeof), 0, 10));
+                      && !empty($this->repostof)) {
+                    $this->setSlugResilient($title . '-' . substr(md5($this->repostof), 0, 10));
                 }
                 
                 parent::save($add_to_feed, $feed_verb);

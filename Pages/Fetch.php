@@ -1,5 +1,5 @@
 <?php
-namespace IdnoPlugins\IndieReactions\Pages {
+namespace IdnoPlugins\Reactions\Pages {
 
     use Idno\Core\Idno;
     

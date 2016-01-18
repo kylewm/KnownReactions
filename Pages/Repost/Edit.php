@@ -1,9 +1,9 @@
 <?php
 
-    namespace IdnoPlugins\IndieReactions\Pages\IndieRepost {
+    namespace IdnoPlugins\Reactions\Pages\Repost {
 
         use Idno\Core\Idno;
-        use IdnoPlugins\IndieReactions\IndieRepost;
+        use IdnoPlugins\Reactions\Repost;
         
         class Edit extends \Idno\Common\Page {
 
@@ -13,10 +13,10 @@
 
                 if (!empty($this->arguments)) {
                     $title = 'Edit Repost';
-                    $object = IndieRepost::getByID($this->arguments[0]);
+                    $object = Repost::getByID($this->arguments[0]);
                 } else {
                     $title = 'New Repost';
-                    $object = new IndieRepost();
+                    $object = new Repost();
                 }
 
                 if ($owner = $object->getOwner()) {
@@ -27,7 +27,8 @@
                 $body = $t->__([
                     'title' => $title,
                     'object' => $object,
-                ])->draw('entity/IndieReactions/edit');
+                    'type' => 'repost',
+                ])->draw('entity/Reactions/edit');
 
                 $t->__([
                     'body' => $body,
@@ -36,7 +37,7 @@
             }
 
             function postContent() {
-                $object = new IndieRepost();
+                $object = new Repost();
                 if ($object->saveDataFromInput($this)) {
                     $forward = $this->getInput('forward-to', $object->getDisplayURL());
                     $this->forward($forward);

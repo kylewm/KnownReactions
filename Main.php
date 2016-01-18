@@ -1,7 +1,7 @@
 <?php
 
 
-namespace IdnoPlugins\IndieReactions {
+namespace IdnoPlugins\Reactions {
 
     require_once __DIR__ . '/vendor/autoload.php';
 
@@ -15,11 +15,11 @@ namespace IdnoPlugins\IndieReactions {
 
         function registerPages()
         {
-            Idno::site()->addPageHandler('/indielike/edit/?', '\IdnoPlugins\IndieReactions\Pages\IndieLike\Edit');
-            Idno::site()->addPageHandler('/indielike/edit/(\w+)/?', '\IdnoPlugins\IndieReactions\Pages\IndieLike\Edit');
-            Idno::site()->addPageHandler('/indierepost/edit/?', '\IdnoPlugins\IndieReactions\Pages\IndieRepost\Edit');
-            Idno::site()->addPageHandler('/indierepost/edit/(\w+)/?', '\IdnoPlugins\IndieReactions\Pages\IndieRepost\Edit');
-            Idno::site()->addPageHandler('/indiereactions/fetch/?', '\IdnoPlugins\IndieReactions\Pages\Fetch');
+            Idno::site()->addPageHandler('/like/edit/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
+            Idno::site()->addPageHandler('/like/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
+            Idno::site()->addPageHandler('/repost/edit/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
+            Idno::site()->addPageHandler('/repost/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
+            Idno::site()->addPageHandler('/reactions/fetch/?', '\IdnoPlugins\Reactions\Pages\Fetch');
 
         }
 

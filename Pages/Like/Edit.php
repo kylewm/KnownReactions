@@ -1,9 +1,9 @@
 <?php
 
-    namespace IdnoPlugins\IndieReactions\Pages\IndieLike {
+    namespace IdnoPlugins\Reactions\Pages\Like {
 
         use Idno\Core\Idno;
-        use IdnoPlugins\IndieReactions\IndieLike;
+        use IdnoPlugins\Reactions\Like;
         
         class Edit extends \Idno\Common\Page {
 
@@ -13,10 +13,10 @@
 
                 if (!empty($this->arguments)) {
                     $title = 'Edit Like';
-                    $object = IndieLike::getByID($this->arguments[0]);
+                    $object = Like::getByID($this->arguments[0]);
                 } else {
                     $title = 'New Like';
-                    $object = new IndieLike();
+                    $object = new Like();
                 }
                 
                 if ($owner = $object->getOwner()) {
@@ -27,7 +27,8 @@
                 $body = $t->__([
                     'title' => $title,
                     'object' => $object,
-                ])->draw('entity/IndieReactions/edit');
+                    'type' => 'like',
+                ])->draw('entity/Reactions/edit');
 
                 $t->__([
                     'body' => $body,
@@ -36,7 +37,7 @@
             }
 
             function postContent() {
-                $object = new \IdnoPlugins\IndieReactions\IndieLike();
+                $object = new \IdnoPlugins\Reactions\Like();
                 if ($object->saveDataFromInput($this)) {
                     $forward = $this->getInput('forward-to', $object->getDisplayURL());
                     $this->forward($forward);

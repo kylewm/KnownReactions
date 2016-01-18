@@ -1,8 +1,8 @@
 <?php
 
 $object = $vars['object'];
-$is_like = $object instanceof \IdnoPlugins\IndieReactions\IndieLike;
-$target = $is_like ? $object->likeof : $object->repostof;
+$type = $vars['type'];
+$target = type == 'like' ? $object->likeof : $object->repostof;
 $desc = $vars['object']->description;
 $body = $vars['object']->body;
 $body_id = 'body'.rand(0,9999);
@@ -10,7 +10,7 @@ $body_id = 'body'.rand(0,9999);
 ?>
 
 <?= $this->draw('entity/edit/header'); ?>
-<form action="<?= $vars['object']->getURL() ?>" method="post">
+<form action="<?= $object->getURL() ?>" method="post">
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2 edit-pane">
@@ -34,7 +34,7 @@ $body_id = 'body'.rand(0,9999);
                     <label for="description">Description</label>
                     <input required class="form-control" type="text" name="description" id="description" value="<?= $desc ?>"/>
                     <?php
-                    if (!$is_like) {
+                    if ($type == 'repost') {
                         echo "<label for=\"$body_id\">Body</label>";
                         echo $this->__([
                             'name' => 'body',
@@ -69,7 +69,7 @@ $body_id = 'body'.rand(0,9999);
          if (url != '') {
              $('#description-spinner').show();
              
-             var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>indiereactions/fetch";
+             var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>reactions/fetch";
              $.get(endpoint, {"url": url}, function success(result) {
                  var desc = '', body = '';
                  if (result.author && result.author.name) {
