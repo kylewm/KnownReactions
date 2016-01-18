@@ -11,7 +11,14 @@
 
                 $this->createGatekeeper();
 
-                $object = new IndieLike();
+                if (!empty($this->arguments)) {
+                    $title = 'Edit Like';
+                    $object = IndieLike::getByID($this->arguments[0]);
+                } else {
+                    $title = 'New Like';
+                    $object = new IndieLike();
+                }
+                
                 if ($owner = $object->getOwner()) {
                     $this->setOwner($owner);
                 }
@@ -23,7 +30,7 @@
 
                 $t->__([
                     'body' => $body,
-                    'title' => 'Edit Like',
+                    'title' => $title,
                 ])->drawPage();
             }
 

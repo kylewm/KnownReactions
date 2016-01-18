@@ -1,8 +1,7 @@
 <?php
 
-if (empty($likeof = $vars['likeof'])) {
-    $likeof = '';
-}
+$likeof = $vars['object']->likeof;
+$desc = $vars['object']->description;
 
 ?>
 
@@ -23,7 +22,7 @@ if (empty($likeof = $vars['likeof'])) {
 
             <div class="content-form">
 
-                <label for="likeof">URL to Like</label>
+                <label for="likeof">URL</label>
                 <input required class="form-control" type="url" name="likeof" id="likeof"
                        placeholder="http://..." value="<?= $likeof ?>" />
 
@@ -37,10 +36,11 @@ if (empty($likeof = $vars['likeof'])) {
                 
                 <div id="description-container">
                   <label for="description">Description</label>
-                  <input required class="form-control" type="text" name="description" id="description"/>
+                  <input required class="form-control" type="text" name="description" id="description" value="<?= $desc ?>"/>
                 </div>       
             </div>
        
+            <?= $this->draw('content/access'); ?>
             <p class="button-bar" >
                 <?= \Idno\Core\Idno::site()->actions()->signForm('/like/edit') ?>
                 <button class="btn btn-cancel" onclick="hideContentCreateForm();">Cancel</button>
@@ -54,10 +54,11 @@ if (empty($likeof = $vars['likeof'])) {
 <?= $this->draw('entity/edit/footer'); ?>
 
 <script>
-
  $(function() {
-     $('#description-container').hide();
-     $('#likeof').on('change', function () {
+     if ($("#description").val() == '') {
+         $('#description-container').hide();
+     }     
+     $('#likeof').change(function () {
          var url = $(this).val();
          if (url != '') {
              $('#description-spinner').show();
@@ -66,19 +67,18 @@ if (empty($likeof = $vars['likeof'])) {
              $.get(endpoint, {"url": url}, function success(result) {
                  var desc = '';
                  if (result.author && result.author.name) {
-                     desc += result.author.name + "'s ";
+                     desc += result.author.name.trim() + "'s ";
                  }
 
                  if (result.name) {
-                     desc += result.name;
+                     var title = result.name.trim().replace(/\s{2,}/g, ' ');
+                     desc += title;
                  } else if (url.contains('twitter.com')) {
                      if (!desc) { desc += 'a '; }
                      desc += 'tweet';
                  } else {
-                     var host = url.replace(/^https?:\/\//, '');
-                     host = host.substring(0,host.indexOf('/')); 
                      if (!desc) { desc += 'a '; }
-                     desc += 'post on ' + host;
+                     desc += 'post on ' + url.replace(/^\w+:\/+([^\/]+).*/, '$1');;
                  }
 
                  $('#description').val(desc);
@@ -87,7 +87,6 @@ if (empty($likeof = $vars['likeof'])) {
              });
          }
      });
-
  }); 
 
  

@@ -16,10 +16,18 @@ namespace IdnoPlugins\IndieReactions {
         function registerPages()
         {
             Idno::site()->addPageHandler('/indielike/edit/?', '\IdnoPlugins\IndieReactions\Pages\IndieLike\Edit');
+            Idno::site()->addPageHandler('/indielike/edit/(\w+)/?', '\IdnoPlugins\IndieReactions\Pages\IndieLike\Edit');
             Idno::site()->addPageHandler('/indierepost/edit/?', '\IdnoPlugins\IndieReactions\Pages\IndieRepost\Edit');
             Idno::site()->addPageHandler('/indiereactions/fetch/?', '\IdnoPlugins\IndieReactions\Pages\Fetch');
 
         }
+
+        function registerContentTypes()
+        {
+            parent::registerContentTypes();
+            \Idno\Common\ContentType::register($this->getNamespace() . '\\LikeContentType');
+        }
+
 
     }
 }
