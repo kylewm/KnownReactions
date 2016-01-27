@@ -42,12 +42,10 @@ namespace IdnoPlugins\Reactions\Pages {
                 $content_plain = \BarnabyWalters\Mf2\getPlaintext($hentry, 'content');
                 $content_html = \BarnabyWalters\Mf2\getHtml($hentry, 'content');
 
-                if (strstr($name, $content_plain) || strstr($content_plain, $name)) {
-                    $name = false;
-                }
-
                 $result['content'] = $content_html;
-                $result['name'] = $name;
+                if (!strstr($name, $content_plain) && !strstr($content_plain, $name)) {
+                    $result['name'] = $name;
+                }
             }
             // let's try OGP and Twitter cards
             else {
@@ -86,7 +84,6 @@ namespace IdnoPlugins\Reactions\Pages {
                 $desc .= trim($result['author']['name']) . '\'s ';
             }
 
-            error_log("name >> {$result['name']} <<");
             if (!empty($result['name'])) {
                 $desc .= preg_replace('/\s{2,}/', ' ', $result['name']);
             } else if (strstr($url, 'twitter.com')) {
@@ -94,7 +91,7 @@ namespace IdnoPlugins\Reactions\Pages {
                 $desc .= 'tweet';
             } else {
                 if ($desc == '') { $desc .= 'a '; }
-                $desc .= 'post on ' + preg_replace('/^\w+:\/+([^\/]+).*/', '$1', $url);
+                $desc .= 'post on ' . preg_replace('/^\w+:\/+([^\/]+).*/', '$1', $url);
             }
 
             $result['description'] = $desc;

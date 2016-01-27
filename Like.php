@@ -3,6 +3,7 @@
     namespace IdnoPlugins\Reactions {
 
         use Idno\Core\Idno;
+        use Idno\Core\Webmention;
 
         class Like extends \Idno\Common\Entity {
 
@@ -37,7 +38,9 @@
                     }
                 }
                 $this->setAccess($page->getInput('access'));
-                $this->save($new);
+                if ($this->save($new)) {
+                    Webmention::sendWebmentionPayload($this->getURL(), $this->likeof);
+                }
                 return true;
             }
 
@@ -50,7 +53,7 @@
                     $this->setSlugResilient($title . '-' . substr(md5($this->likeof), 0, 10));
                 }
 
-                parent::save($add_to_feed, $feed_verb);
+                return parent::save($add_to_feed, $feed_verb);
             }
 
         }

@@ -41,7 +41,10 @@
                     }
                 }
                 $this->setAccess($page->getInput('access'));
-                $this->save($new);
+                if ($this->save($new)) {
+                    Webmention::sendWebmentionPayload($this->getURL(), $this->repostof);
+
+                }
                 return true;
             }
 
@@ -54,7 +57,7 @@
                     $this->setSlugResilient($title . '-' . substr(md5($this->repostof), 0, 10));
                 }
 
-                parent::save($add_to_feed, $feed_verb);
+                return parent::save($add_to_feed, $feed_verb);
             }
 
         }
