@@ -9,3 +9,5 @@ to fill the gap.
 ## License
 
 This software is dedicated to the public domain under Creative Commons [CC0][].
+
+[CC0]: http://creativecommons.org/publicdomain/zero/1.0/
