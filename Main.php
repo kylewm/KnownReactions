@@ -17,8 +17,10 @@ namespace IdnoPlugins\Reactions {
         {
             Idno::site()->addPageHandler('/like/edit/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
             Idno::site()->addPageHandler('/like/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
+            Idno::site()->addPageHandler('/like/delete/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Like\Delete');
             Idno::site()->addPageHandler('/repost/edit/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
             Idno::site()->addPageHandler('/repost/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
+            Idno::site()->addPageHandler('/repost/delete/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Repost\Delete');
             Idno::site()->addPageHandler('/reactions/fetch/?', '\IdnoPlugins\Reactions\Pages\Fetch');
 
         }
