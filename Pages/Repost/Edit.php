@@ -37,7 +37,14 @@
             }
 
             function postContent() {
-                $object = new Repost();
+                $this->createGatekeeper();
+
+                if (!empty($this->arguments)) {
+                    $object = Repost::getByID($this->arguments[0]);
+                } else {
+                    $object = new Repost();
+                }
+
                 if ($object->saveDataFromInput($this)) {
                     $forward = $this->getInput('forward-to', $object->getDisplayURL());
                     $this->forward($forward);

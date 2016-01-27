@@ -37,7 +37,14 @@
             }
 
             function postContent() {
-                $object = new \IdnoPlugins\Reactions\Like();
+                $this->createGatekeeper();
+
+                if (!empty($this->arguments)) {
+                    $object = Like::getByID($this->arguments[0]);
+                } else {
+                    $object = new Like();
+                }
+
                 if ($object->saveDataFromInput($this)) {
                     $forward = $this->getInput('forward-to', $object->getDisplayURL());
                     $this->forward($forward);
