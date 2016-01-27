@@ -4,7 +4,7 @@
 
         use Idno\Core\Idno;
         use IdnoPlugins\Reactions\Repost;
-        
+
         class Edit extends \Idno\Common\Page {
 
             function getContent() {
@@ -30,10 +30,14 @@
                     'type' => 'repost',
                 ])->draw('entity/Reactions/edit');
 
-                $t->__([
-                    'body' => $body,
-                    'title' => $title,
-                ])->drawPage();
+                if (!empty($this->xhr)) {
+                    echo $body;
+                } else {
+                    $t->__([
+                        'body' => $body,
+                        'title' => $title,
+                    ])->drawPage();
+                }
             }
 
             function postContent() {

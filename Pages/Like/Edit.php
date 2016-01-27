@@ -4,7 +4,7 @@
 
         use Idno\Core\Idno;
         use IdnoPlugins\Reactions\Like;
-        
+
         class Edit extends \Idno\Common\Page {
 
             function getContent() {
@@ -18,7 +18,7 @@
                     $title = 'New Like';
                     $object = new Like();
                 }
-                
+
                 if ($owner = $object->getOwner()) {
                     $this->setOwner($owner);
                 }
@@ -30,10 +30,14 @@
                     'type' => 'like',
                 ])->draw('entity/Reactions/edit');
 
-                $t->__([
-                    'body' => $body,
-                    'title' => $title,
-                ])->drawPage();
+                if (!empty($this->xhr)) {
+                    echo $body;
+                } else {
+                    $t->__([
+                        'body' => $body,
+                        'title' => $title,
+                    ])->drawPage();
+                }
             }
 
             function postContent() {
