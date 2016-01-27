@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "637fd4b050aee0d194fb6dfb2bb99a7a",
+    "hash": "4d1413e0cdc3dbfdcb778a717a06b3e9",
+    "content-hash": "0870675e66a560abcbbf365a411d8538",
     "packages": [
         {
             "name": "barnabywalters/mf-cleaner",
@@ -45,45 +46,6 @@
             ],
             "description": "Cleans up microformats2 array structures",
             "time": "2014-10-06 23:11:15"
-        },
-        {
-            "name": "indieweb/comments",
-            "version": "0.1.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/indieweb/php-comments.git",
-                "reference": "804e3863ca58edc7c1897d3f1d11f7d086636886"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/indieweb/php-comments/zipball/804e3863ca58edc7c1897d3f1d11f7d086636886",
-                "reference": "804e3863ca58edc7c1897d3f1d11f7d086636886",
-                "shasum": ""
-            },
-            "require": {
-                "tantek/cassis": "0.1.16124"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/indieweb/comments.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Aaron Parecki",
-                    "homepage": "http://aaronparecki.com"
-                }
-            ],
-            "keywords": [
-                "comments",
-                "indieweb"
-            ],
-            "time": "2015-10-06 16:23:56"
         },
         {
             "name": "mf2/mf2",

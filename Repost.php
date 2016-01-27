@@ -14,7 +14,7 @@
                 }
                 return $result;
             }
-            
+
             function getActivityStreamsObjectType()
             {
                 return 'share';
@@ -28,9 +28,18 @@
                     $new = false;
                 }
 
-                $this->repostof = $page->getInput('target');
+                $this->repostof = $page->getInput('repost-of');
                 $this->description = $page->getInput('description');
                 $this->body = $page->getInput('body');
+                if (empty($this->description) && empty($this->body)) {
+                    $result = \IdnoPlugins\Reactions\Pages\Fetch::fetch($this->likeof);
+                    if (isset($result['description'])) {
+                        $this->description = $result['description'];
+                    }
+                    if (isset($result['content'])) {
+                        $this->body = $result['content'];
+                    }
+                }
                 $this->setAccess($page->getInput('access'));
                 $this->save($new);
                 return true;
@@ -44,10 +53,10 @@
                       && !empty($this->repostof)) {
                     $this->setSlugResilient($title . '-' . substr(md5($this->repostof), 0, 10));
                 }
-                
+
                 parent::save($add_to_feed, $feed_verb);
             }
-            
+
         }
 
     }

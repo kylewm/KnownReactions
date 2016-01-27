@@ -14,7 +14,7 @@
                 }
                 return $result;
             }
-            
+
             function getActivityStreamsObjectType()
             {
                 return 'like';
@@ -28,8 +28,14 @@
                     $new = false;
                 }
 
-                $this->likeof = $page->getInput('target');
+                $this->likeof = $page->getInput('like-of');
                 $this->description = $page->getInput('description');
+                if (empty($this->description)) {
+                    $result = \IdnoPlugins\Reactions\Pages\Fetch::fetch($this->likeof);
+                    if (!empty($result['description'])) {
+                        $this->description = $result['description'];
+                    }
+                }
                 $this->setAccess($page->getInput('access'));
                 $this->save($new);
                 return true;
@@ -43,10 +49,10 @@
                       && !empty($this->likeof)) {
                     $this->setSlugResilient($title . '-' . substr(md5($this->likeof), 0, 10));
                 }
-                
+
                 parent::save($add_to_feed, $feed_verb);
             }
-            
+
         }
 
     }

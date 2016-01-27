@@ -2,18 +2,27 @@
 namespace IdnoPlugins\Reactions\Pages {
 
     use Idno\Core\Idno;
-    
+
     class Fetch extends \Idno\Common\Page {
-        
+
         function getContent()
         {
             $t = Idno::site()->template();
             $t->setTemplateType('json');
 
             $url = $this->getInput('url');
-            $html = file_get_contents($url);
-            $host = parse_url($url)['host'];
+            $t->__(self::fetch($url))->drawPage();
+        }
 
+        public static function fetch($url)
+        {
+            $result = [];
+            $html = file_get_contents($url);
+            if (!$html) {
+                return $result;
+            }
+
+            $host = parse_url($url)['host'];
             if (preg_match('/(www\.|m\.)?twitter.com/', $host)) {
                 $parsed = \Mf2\Shim\parseTwitter($html, $url);
             } else {
@@ -24,9 +33,9 @@ namespace IdnoPlugins\Reactions\Pages {
             if (!empty($hentries)) {
                 $hentry = $hentries[0];
                 if (!empty($author = \BarnabyWalters\Mf2\getAuthor($hentry, $parsed))) {
-                    $t->author = [
-                        "name" => \BarnabyWalters\Mf2\getPlaintext($author, 'name'),
-                        "url" => \BarnabyWalters\Mf2\getPlaintext($author, 'url'),
+                    $result['author'] = [
+                        'name' => \BarnabyWalters\Mf2\getPlaintext($author, 'name'),
+                        'url' => \BarnabyWalters\Mf2\getPlaintext($author, 'url'),
                     ];
                 }
                 $name = \BarnabyWalters\Mf2\getPlaintext($hentry, 'name');
@@ -37,8 +46,8 @@ namespace IdnoPlugins\Reactions\Pages {
                     $name = false;
                 }
 
-                $t->content = $content_html;
-                $t->name = $name;
+                $result['content'] = $content_html;
+                $result['name'] = $name;
             }
             // let's try OGP and Twitter cards
             else {
@@ -46,6 +55,7 @@ namespace IdnoPlugins\Reactions\Pages {
                 $doc->loadHTML($html);
                 $metas = $doc->getElementsByTagName('meta');
                 $metaprops = [];
+
                 foreach ($metas as $meta) {
                     if ($meta->hasAttribute('name')) {
                         $metaprops[$meta->getAttribute('name')] = $meta->getAttribute('content');
@@ -55,25 +65,41 @@ namespace IdnoPlugins\Reactions\Pages {
                 }
 
                 if (!empty($metaprops['twitter:title'])) {
-                    $t->name = $metaprops['twitter:title'];
+                    $result['name'] = $metaprops['twitter:title'];
                 } else if (!empty($metaprops['og:title'])) {
-                    $t->name = $metaprops['og:title'];
+                    $result['name'] = $metaprops['og:title'];
                 } else {
                     if (!empty($titles = $doc->getElementsByTagName('title'))) {
-                        $t->name = $titles[0]->nodeValue;
+                        $result['name'] = $titles[0]->nodeValue;
                     }
                 }
 
                 if (!empty($metaprops['twitter:description'])) {
-                    $t->content = $metaprops['twitter:description'];
+                    $result['content'] = $metaprops['twitter:description'];
                 } else if (!empty($metaprops['og:description'])) {
-                    $t->content = $metaprops['og:description'];
+                    $result['content'] = $metaprops['og:description'];
                 }
             }
 
-            $t->drawPage();
+            $desc = '';
+            if (!empty($result['author']) && !empty($result['author']['name'])) {
+                $desc .= trim($result['author']['name']) . '\'s ';
+            }
+
+            error_log("name >> {$result['name']} <<");
+            if (!empty($result['name'])) {
+                $desc .= preg_replace('/\s{2,}/', ' ', $result['name']);
+            } else if (strstr($url, 'twitter.com')) {
+                if ($desc == '') { $desc .= 'a '; }
+                $desc .= 'tweet';
+            } else {
+                if ($desc == '') { $desc .= 'a '; }
+                $desc .= 'post on ' + preg_replace('/^\w+:\/+([^\/]+).*/', '$1', $url);
+            }
+
+            $result['description'] = $desc;
+            return $result;
         }
-        
+
     }
 }
-    
