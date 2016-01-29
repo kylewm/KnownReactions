@@ -33,10 +33,14 @@ namespace IdnoPlugins\Reactions\Pages {
             if (!empty($hentries)) {
                 $hentry = $hentries[0];
                 if (!empty($author = \BarnabyWalters\Mf2\getAuthor($hentry, $parsed))) {
-                    $result['author'] = [
-                        'name' => \BarnabyWalters\Mf2\getPlaintext($author, 'name'),
-                        'url' => \BarnabyWalters\Mf2\getPlaintext($author, 'url'),
-                    ];
+                    if (is_string($author)) {
+                        $result['author'] = ['url' => $author];
+                    } else {
+                        $result['author'] = [
+                            'name' => \BarnabyWalters\Mf2\getPlaintext($author, 'name'),
+                            'url' => \BarnabyWalters\Mf2\getPlaintext($author, 'url'),
+                        ];
+                    }
                 }
                 $name = \BarnabyWalters\Mf2\getPlaintext($hentry, 'name');
                 $content_plain = \BarnabyWalters\Mf2\getPlaintext($hentry, 'content');
