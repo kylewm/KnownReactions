@@ -30,6 +30,11 @@
                 }
 
                 $this->repostof = $page->getInput('repost-of');
+                if ($this->repostof) {
+                    foreach ((array) $this->repostof as $repostofurl) {
+                        $this->syndicatedto = Webmention::addSyndicatedReplyTargets($repostofurl, $this->syndicatedto);
+                    }
+                }
                 $this->description = $page->getInput('description');
                 $this->body = $page->getInput('body');
                 if (empty($this->description) && empty($this->body)) {

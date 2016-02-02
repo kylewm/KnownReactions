@@ -40,7 +40,7 @@ if ($type == 'like') {
                     <label for="description">Description</label>
                     <input required class="form-control" type="text" name="description" id="description" value="<?= $desc ?>"/>
                     <?php
-                    if ($type == 'repost') {
+                    if ($type == 'share') {
                         echo "<label for=\"$body_id\">Body</label>";
                         echo $this->__([
                             'name' => 'body',
@@ -51,6 +51,8 @@ if ($type == 'like') {
                     ?>
                 </div>
             </div>
+
+            <?php if (empty($object->_id)) echo $this->drawSyndication($type); ?>
 
             <?= $this->draw('content/access'); ?>
             <p class="button-bar" >

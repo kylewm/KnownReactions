@@ -30,6 +30,11 @@
                 }
 
                 $this->likeof = $page->getInput('like-of');
+                if ($this->likeof) {
+                    foreach ((array) $this->likeof as $likeofurl) {
+                        $this->syndicatedto = Webmention::addSyndicatedReplyTargets($likeofurl, $this->syndicatedto);
+                    }
+                }
                 $this->description = $page->getInput('description');
                 if (empty($this->description)) {
                     $result = \IdnoPlugins\Reactions\Pages\Fetch::fetch($this->likeof);
