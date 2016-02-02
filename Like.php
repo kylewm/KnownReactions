@@ -48,9 +48,9 @@
             {
                 // generate our own meaningful, unique(ish) slug
                 if (!$this->getSlug() && empty($this->_id)
-                      && !empty($title = $this->getTitle())
+                      && !empty($this->getTitle())
                       && !empty($this->likeof)) {
-                    $this->setSlugResilient($title . '-' . substr(md5($this->likeof), 0, 10));
+                    $this->setSlugResilient($this->getTitle() . '-' . substr(md5($this->likeof), 0, 10));
                 }
 
                 return parent::save($add_to_feed, $feed_verb);

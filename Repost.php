@@ -3,6 +3,7 @@
     namespace IdnoPlugins\Reactions {
 
         use Idno\Core\Idno;
+        use Idno\Core\Webmention;
 
         class Repost extends \Idno\Common\Entity {
 
