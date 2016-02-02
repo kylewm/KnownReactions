@@ -8,13 +8,19 @@ $desc = $vars['object']->description;
 $body = $vars['object']->body;
 $body_id = 'body'.rand(0,9999);
 
+if ($type == 'like') {
+    $title = $object->getID() ? 'Edit Like' : 'New Like';
+} else {
+    $title = $object->getID() ? 'Edit Repost' : 'New Repost';
+}
+
 ?>
 
 <?= $this->draw('entity/edit/header'); ?>
 <form action="<?= $object->getURL() ?>" method="post">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 edit-pane">
-            <h4><?= $vars['title'] ?></h4>
+            <h4><?= $title ?></h4>
 
             <div class="content-form">
 

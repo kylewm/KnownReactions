@@ -8,7 +8,7 @@
             public $category_title = 'Likes';
             public $entity_class = 'IdnoPlugins\\Reactions\\Like';
             public $indieWebContentType = array('like');
-            
+
         }
 
     }
