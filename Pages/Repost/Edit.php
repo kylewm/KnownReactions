@@ -23,17 +23,12 @@
                     $this->setOwner($owner);
                 }
 
-                $t = Idno::site()->template();
-                $body = $t->__([
-                    'title' => $title,
-                    'object' => $object,
-                    'type' => 'repost',
-                ])->draw('entity/Reactions/edit');
+                $body = $object->drawEdit();
 
                 if (!empty($this->xhr)) {
                     echo $body;
                 } else {
-                    $t->__([
+                    Idno::site()->template()->__([
                         'body' => $body,
                         'title' => $title,
                     ])->drawPage();

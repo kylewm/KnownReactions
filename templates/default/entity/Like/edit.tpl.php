@@ -1,7 +1,7 @@
 <?php
 
 $object = $vars['object'];
-$type = $vars['type'];
+$type = $object->getActivityStreamsObjectType();
 $target = $type == 'like' ? $object->likeof : $object->repostof;
 $target_name = $type == 'like' ? 'like-of' : 'repost-of';
 $desc = $vars['object']->description;
