@@ -43,7 +43,9 @@
                     }
                 }
                 $this->setAccess($page->getInput('access'));
-                if ($this->save($new)) {
+                Idno::site()->logging()->log("saving like. new: $new");
+                if ($this->publish($new)) {
+                    Idno::site()->logging()->log("sending webmentions from {$this->getURL()} to {$this->likeof}");
                     Webmention::sendWebmentionPayload($this->getURL(), $this->likeof);
                 }
                 return true;

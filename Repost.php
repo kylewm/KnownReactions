@@ -47,7 +47,7 @@
                     }
                 }
                 $this->setAccess($page->getInput('access'));
-                if ($this->save($new)) {
+                if ($this->publish($new)) {
                     Webmention::sendWebmentionPayload($this->getURL(), $this->repostof);
 
                 }
