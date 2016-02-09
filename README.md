@@ -11,3 +11,9 @@ to fill the gap.
 This software is dedicated to the public domain under Creative Commons [CC0][].
 
 [CC0]: http://creativecommons.org/publicdomain/zero/1.0/
+
+
+## Changelog
+
+- 0.1.3 - 2016-02-09: add argument drawSyndication call
+  to support new retroactive posse feature in core.
