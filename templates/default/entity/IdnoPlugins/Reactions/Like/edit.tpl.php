@@ -52,7 +52,7 @@ if ($type == 'like') {
                 </div>
             </div>
 
-            <?php if (empty($object->_id)) echo $this->drawSyndication($type); ?>
+            <?php if (empty($object->_id)) echo $this->drawSyndication($type, $object->getPosseLinks()); ?>
 
             <?= $this->draw('content/access'); ?>
             <p class="button-bar" >
