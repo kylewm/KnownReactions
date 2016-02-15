@@ -9,6 +9,11 @@
             public $entity_class = 'IdnoPlugins\\Reactions\\Like';
             public $indieWebContentType = array('like');
 
+            public function getEditURL()
+            {
+                return \Idno\Core\Idno::site()->config()->url . 'indielike/edit';
+            }
+
         }
 
     }

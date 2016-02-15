@@ -63,6 +63,11 @@
                 return parent::save($add_to_feed, $feed_verb);
             }
 
+            public function getEditURL()
+            {
+                return \Idno\Core\Idno::site()->config()->getDisplayURL() . 'indielike/edit/' . $this->getID();
+            }
+
         }
 
     }
