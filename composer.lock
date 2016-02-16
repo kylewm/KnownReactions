@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4d1413e0cdc3dbfdcb778a717a06b3e9",
-    "content-hash": "0870675e66a560abcbbf365a411d8538",
+    "hash": "7cc9d9054e368174791d8973f32a7215",
     "packages": [
         {
             "name": "barnabywalters/mf-cleaner",
@@ -154,29 +153,6 @@
                 "twitter"
             ],
             "time": "2014-04-29 17:50:56"
-        },
-        {
-            "name": "tantek/cassis",
-            "version": "v0.1.16124",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tantek/cassis.git",
-                "reference": "b9ec7142179950010c896ec3894aece0a56b0029"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tantek/cassis/zipball/b9ec7142179950010c896ec3894aece0a56b0029",
-                "reference": "b9ec7142179950010c896ec3894aece0a56b0029",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "cassis-loader.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "time": "2014-02-18 20:17:32"
         }
     ],
     "packages-dev": [],

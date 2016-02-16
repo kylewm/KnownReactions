@@ -1,7 +1,6 @@
 {
     "require": {
         "mf2/shim": "0.2.*",
-        "barnabywalters/mf-cleaner": "^0.1.4",
-        "mf2/mf2": "~0.2"
+        "barnabywalters/mf-cleaner": "^0.1.4"
     }
 }
