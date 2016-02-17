@@ -17,6 +17,9 @@
                 } else {
                     $title = 'New Like';
                     $object = new Like();
+                    if ($this->getInput('url')) {
+                        $object->likeof = $this->getInput('url');
+                    }
                 }
 
                 if ($owner = $object->getOwner()) {

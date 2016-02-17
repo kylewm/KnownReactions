@@ -17,6 +17,9 @@
                 } else {
                     $title = 'New Repost';
                     $object = new Repost();
+                    if ($this->getInput('url')) {
+                        $object->repostof = $this->getInput('url');
+                    }
                 }
 
                 if ($owner = $object->getOwner()) {
