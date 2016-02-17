@@ -24,9 +24,11 @@ if ($type == 'like') {
 
             <div class="content-form">
 
-                <label for="target">URL</label>
-                <input required class="form-control" type="url" name="<?= $target_name ?>" id="target"
-                       placeholder="http://..." value="<?= $target ?>" />
+                <div class="form-group">
+                    <label for="target">URL</label>
+                    <input required class="form-control" type="url" name="<?= $target_name ?>" id="target"
+                           placeholder="http://..." value="<?= $target ?>" />
+                </div>
 
                 <div id="description-spinner-container">
                     <div class="spinner" id="description-spinner" style="display:none">
@@ -37,8 +39,11 @@ if ($type == 'like') {
                 </div>
 
                 <div id="description-container">
-                    <label for="description">Description</label>
-                    <input required class="form-control" type="text" name="description" id="description" value="<?= $desc ?>"/>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input required class="form-control" type="text" name="description" id="description" value="<?= $desc ?>"/>
+                    </div>
+
                     <?php
                     if ($type == 'share') {
                         echo "<label for=\"$body_id\">Body</label>";
