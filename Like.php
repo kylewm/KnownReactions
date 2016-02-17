@@ -21,8 +21,9 @@
                 return 'like';
             }
 
-            function saveDataFromInput($page)
+            function saveDataFromInput()
             {
+                $page = Idno::site()->currentPage();
                 if (empty($this->_id)) {
                     $new = true;
                 } else {

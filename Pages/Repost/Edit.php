@@ -47,7 +47,7 @@
                     $object = new Repost();
                 }
 
-                if ($object->saveDataFromInput($this)) {
+                if ($object->saveDataFromInput()) {
                     $forward = $this->getInput('forward-to', $object->getDisplayURL());
                     $this->forward($forward);
                 }
