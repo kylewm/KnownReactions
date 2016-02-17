@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "7cc9d9054e368174791d8973f32a7215",
+    "content-hash": "0a12ddfa1d118b11fa243c17af4cfa7a",
     "packages": [
         {
             "name": "barnabywalters/mf-cleaner",
