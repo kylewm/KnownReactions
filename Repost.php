@@ -38,7 +38,7 @@
                 $this->description = $page->getInput('description');
                 $this->body = $page->getInput('body');
                 if (empty($this->description) && empty($this->body)) {
-                    $result = \IdnoPlugins\Reactions\Pages\Fetch::fetch($this->likeof);
+                    $result = \IdnoPlugins\Reactions\Pages\Fetch::fetch($this->repostof);
                     if (isset($result['description'])) {
                         $this->description = $result['description'];
                     }
