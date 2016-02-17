@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+//require __DIR__ . '/vendor/autoload.php';
 
-//loader()->registerNamespace('Mf2/Shim', dirname(dirname(__FILE__)) . '/external/mf2/shim');
-//loader()->registerNamespace('BarnabyWalters/Mf2', dirname(dirname(__FILE__)) . '/external/barnabywalters/mf-cleaner/src');
+require_once __DIR__ . '/external/barnabywalters/mf-cleaner/src/BarnabyWalters/Mf2/Functions.php';
+require_once __DIR__ . '/external/mf2/shim/Mf2/functions.php';
+require_once __DIR__ . '/external/mf2/shim/Mf2/Shim/Twitter.php';

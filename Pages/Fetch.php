@@ -26,7 +26,7 @@ namespace IdnoPlugins\Reactions\Pages {
             if (preg_match('/(www\.|m\.)?twitter.com/', $host)) {
                 $parsed = \Mf2\Shim\parseTwitter($html, $url);
             } else {
-                $parsed = \Mf2\parse($html, $url);
+                $parsed = (new \Mf2\Parser($html, $url))->parse();
             }
 
             $hentries = \BarnabyWalters\Mf2\findMicroformatsByType($parsed, 'h-entry');
