@@ -55,9 +55,8 @@
             function save($add_to_feed = false, $feed_verb = 'post')
             {
                 // generate our own meaningful, unique(ish) slug
-                if (!$this->getSlug() && empty($this->_id)
-                      && !empty($this->getTitle())
-                      && !empty($this->likeof)) {
+                if (!$this->getSlug() && !$this->_id
+                        && $this->getTitle() && $this->likeof) {
                     $this->setSlugResilient($this->getTitle() . '-' . substr(md5($this->likeof), 0, 10));
                 }
 

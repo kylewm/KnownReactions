@@ -58,8 +58,8 @@
             function save($add_to_feed = false, $feed_verb = 'post')
             {
                 // generate our own meaningful, unique(ish) slug
-                if (!$this->getSlug() && empty($this->_id)
-                      && !empty($this->getTitle()) && !empty($this->repostof)) {
+                if (!$this->getSlug() && !$this->_id
+                      && $this->getTitle() && $this->repostof) {
                     $this->setSlugResilient($this->getTitle() . '-' . substr(md5($this->repostof), 0, 10));
                 }
 
