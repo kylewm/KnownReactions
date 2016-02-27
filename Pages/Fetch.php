@@ -32,7 +32,8 @@ namespace IdnoPlugins\Reactions\Pages {
             $hentries = \BarnabyWalters\Mf2\findMicroformatsByType($parsed, 'h-entry');
             if (!empty($hentries)) {
                 $hentry = $hentries[0];
-                if (!empty($author = \BarnabyWalters\Mf2\getAuthor($hentry, $parsed))) {
+                $author = \BarnabyWalters\Mf2\getAuthor($hentry, $parsed);
+                if (!empty($author)) {
                     if (is_string($author)) {
                         $result['author'] = ['url' => $author];
                     } else {
@@ -71,7 +72,8 @@ namespace IdnoPlugins\Reactions\Pages {
                 } else if (!empty($metaprops['og:title'])) {
                     $result['name'] = $metaprops['og:title'];
                 } else {
-                    if (!empty($titles = $doc->getElementsByTagName('title'))) {
+                    $titles = $doc->getElementsByTagName('title');
+                    if (!empty($titles)) {
                         $result['name'] = $titles[0]->nodeValue;
                     }
                 }
