@@ -77,6 +77,21 @@ if ($type == 'like') {
      if ($("#description").val() == '') {
          $('#description-container').hide();
      }
+     if ($("#target").val() != '') {
+         var url = $("#target").val(); 
+         if (url != '') {
+             $('#description-spinner').show();
+
+             var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>reactions/fetch";
+             $.get(endpoint, {"url": url}, function success(result) {
+                 $('#description').val(result.description || '');
+                 $('#<?= $body_id ?>').val(result.content || '');
+                 $('#description-spinner').hide();
+                 $('#description-container').show();
+             });
+         }
+      }
+
      $('#target').change(function () {
          var url = $(this).val();
          if (url != '') {
