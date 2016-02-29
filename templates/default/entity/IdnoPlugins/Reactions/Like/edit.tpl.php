@@ -79,21 +79,16 @@ if ($type == 'like') {
      }
      if ($("#target").val() != '') {
          var url = $("#target").val(); 
-         if (url != '') {
-             $('#description-spinner').show();
-
-             var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>reactions/fetch";
-             $.get(endpoint, {"url": url}, function success(result) {
-                 $('#description').val(result.description || '');
-                 $('#<?= $body_id ?>').val(result.content || '');
-                 $('#description-spinner').hide();
-                 $('#description-container').show();
-             });
+         getDescription(url);
          }
-      }
-
+    
      $('#target').change(function () {
          var url = $(this).val();
+         getDescription(url);
+     });
+ });
+
+function getDescription(url){
          if (url != '') {
              $('#description-spinner').show();
 
@@ -105,8 +100,7 @@ if ($type == 'like') {
                  $('#description-container').show();
              });
          }
-     });
- });
+    }
 
 
 </script>
