@@ -2,6 +2,7 @@
 namespace IdnoPlugins\Reactions\Pages {
 
     use Idno\Core\Idno;
+    use Idno\Core\Webservice;
 
     class Fetch extends \Idno\Common\Page {
 
@@ -17,8 +18,14 @@ namespace IdnoPlugins\Reactions\Pages {
         public static function fetch($url)
         {
             $result = [];
-            $html = file_get_contents($url);
-            if (!$html) {
+            $response = Webservice::get($url);
+
+            $status = $response['response'];
+            $html   = $response['content'];
+
+            if ($status < 200 || $status >= 300) {
+                $result['status'] = $status;
+                $result['error']  = $response['error'];
                 return $result;
             }
 

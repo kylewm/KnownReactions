@@ -38,6 +38,10 @@ if ($type == 'like') {
                     </div>
                 </div>
 
+                <div id="error-container" class="alert alert-danger">
+
+                </div>
+
                 <div id="description-container">
                     <div class="form-group">
                         <label for="description">Description</label>
@@ -74,33 +78,38 @@ if ($type == 'like') {
 
 <script>
  $(function() {
-     if ($("#description").val() == '') {
-         $('#description-container').hide();
+     $('#description-container').hide();
+     $('#error-container').hide();
+
+     var url = $("#target").val();
+     if (url) {
+         getDescription(url);
      }
-     if ($("#target").val() != '') {
-         var url = $("#target").val(); 
-         getDescription(url);
-         }
-    
+
      $('#target').change(function () {
-         var url = $(this).val();
-         getDescription(url);
+         getDescription($(this).val());
      });
  });
 
-function getDescription(url){
-         if (url != '') {
-             $('#description-spinner').show();
+ function getDescription(url){
+     if (url) {
+         $('#description-spinner').show();
 
-             var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>reactions/fetch";
-             $.get(endpoint, {"url": url}, function success(result) {
+         var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>reactions/fetch";
+         $.get(endpoint, {"url": url}, function success(result) {
+             $('#description-spinner').hide();
+
+             if (result.error) {
+                 $('#error-container').show();
+                 $('#error-container').html(result.error);
+             } else {
+                 $('#error-container').hide();
                  $('#description').val(result.description || '');
                  $('#<?= $body_id ?>').val(result.content || '');
-                 $('#description-spinner').hide();
                  $('#description-container').show();
-             });
-         }
-    }
+             }
 
-
+         });
+     }
+ }
 </script>
