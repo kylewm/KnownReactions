@@ -77,8 +77,18 @@ if ($type == 'like') {
      if ($("#description").val() == '') {
          $('#description-container').hide();
      }
+     if ($("#target").val() != '') {
+         var url = $("#target").val(); 
+         getDescription(url);
+         }
+    
      $('#target').change(function () {
          var url = $(this).val();
+         getDescription(url);
+     });
+ });
+
+function getDescription(url){
          if (url != '') {
              $('#description-spinner').show();
 
@@ -90,8 +100,7 @@ if ($type == 'like') {
                  $('#description-container').show();
              });
          }
-     });
- });
+    }
 
 
 </script>
