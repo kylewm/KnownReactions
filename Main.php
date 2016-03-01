@@ -14,14 +14,30 @@ namespace IdnoPlugins\Reactions {
             parent::registerEventHooks();
             Idno::site()->addEventHook('plugins/loaded', function (Event $evt) {
                 // make sure our content types are before IdnoPlugins\Like\ContentType
-                foreach (['LikeContentType', 'RepostContentType'] as $targetType) {
-                    $targetType = $this->getNamespace() . '\\' . $targetType;
+                $bookmarkType = '\IdnoPlugins\Like\ContentType';
+                if (class_exists($bookmarkType)) {
+
+                    $bookmarkIndex = -1;
                     for ($ii = 0 ; $ii < count(ContentType::$registered) ; $ii++) {
                         $contentType = ContentType::$registered[$ii];
-                        if ($contentType instanceof $targetType) {
-                            array_splice(ContentType::$registered, $ii, 1);
-                            array_unshift(ContentType::$registered, $contentType);
+                        if ($contentType instanceof $bookmarkType) {
+                            $bookmarkIndex = $ii;
                             break;
+                        }
+                    }
+
+                    if ($bookmarkIndex > -1) {
+                        foreach (['LikeContentType', 'RepostContentType'] as $targetType) {
+                            $targetType = $this->getNamespace() . '\\' . $targetType;
+                            for ($ii = 0 ; $ii < count(ContentType::$registered) ; $ii++) {
+                                $contentType = ContentType::$registered[$ii];
+                                if ($contentType instanceof $targetType) {
+                                    array_splice(ContentType::$registered, $ii, 1);
+                                    array_splice(ContentType::$registered, $bookmarkIndex, 0, [$contentType]);
+                                    $bookmarkIndex++;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
