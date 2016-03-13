@@ -52,7 +52,7 @@
                 return true;
             }
 
-            function save($add_to_feed = false, $feed_verb = 'post')
+            function save()
             {
                 // generate our own meaningful, unique(ish) slug
                 if (!$this->getSlug() && !$this->_id
@@ -60,7 +60,7 @@
                     $this->setSlugResilient($this->getTitle() . '-' . substr(md5($this->likeof), 0, 10));
                 }
 
-                return parent::save($add_to_feed, $feed_verb);
+                return parent::save();
             }
 
             public function getEditURL()

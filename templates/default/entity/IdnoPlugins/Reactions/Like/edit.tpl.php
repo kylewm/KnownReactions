@@ -78,6 +78,31 @@ if ($type == 'like') {
 
 <script>
  $(function() {
+
+     function getDescription(url){
+         if (url) {
+             $('#description-spinner').show();
+
+             var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>reactions/fetch";
+             $.get(endpoint, {"url": url}, function success(result) {
+                 $('#description-spinner').hide();
+
+                 if (result.error) {
+                     $('#error-container').show();
+                     $('#error-container').html(result.error);
+                     $('#description-container').show();
+
+                 } else {
+                     $('#error-container').hide();
+                     $('#description').val(result.description || '');
+                     $('#<?= $body_id ?>').val(result.content || '');
+                     $('#description-container').show();
+                 }
+
+             });
+         }
+     }
+
      $('#description-container').hide();
      $('#error-container').hide();
 
@@ -89,27 +114,8 @@ if ($type == 'like') {
      $('#target').change(function () {
          getDescription($(this).val());
      });
+
  });
 
- function getDescription(url){
-     if (url) {
-         $('#description-spinner').show();
 
-         var endpoint = "<?= \Idno\Core\Idno::site()->config()->getDisplayURL() ?>reactions/fetch";
-         $.get(endpoint, {"url": url}, function success(result) {
-             $('#description-spinner').hide();
-
-             if (result.error) {
-                 $('#error-container').show();
-                 $('#error-container').html(result.error);
-             } else {
-                 $('#error-container').hide();
-                 $('#description').val(result.description || '');
-                 $('#<?= $body_id ?>').val(result.content || '');
-                 $('#description-container').show();
-             }
-
-         });
-     }
- }
 </script>
