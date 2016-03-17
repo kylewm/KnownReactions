@@ -80,8 +80,9 @@ namespace IdnoPlugins\Reactions\Pages {
                     $result['name'] = $metaprops['og:title'];
                 } else {
                     $titles = $doc->getElementsByTagName('title');
-                    if (!empty($titles)) {
-                        $result['name'] = $titles[0]->nodeValue;
+                    foreach ($titles as $title) {
+                        $result['name'] = $title->nodeValue;
+                        break;
                     }
                 }
 
