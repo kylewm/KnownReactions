@@ -31,7 +31,7 @@ namespace IdnoPlugins\Reactions\Pages {
 
             $host = parse_url($url)['host'];
             if (preg_match('/(www\.|m\.)?twitter.com/', $host)) {
-                $parsed = \Mf2\Shim\parseTwitter($html, $url);
+                $parsed = self::parseTwitter($html, $url);
             } else {
                 $parsed = (new \Mf2\Parser($html, $url))->parse();
             }
@@ -112,5 +112,24 @@ namespace IdnoPlugins\Reactions\Pages {
             return $result;
         }
 
+        private static function parseTwitter($html, $url) {
+            $parsed = \Mf2\Shim\parseTwitter($html, $url);
+
+            if (!empty($parsed['items'][0]['properties']['content'][0]['html'])) {
+                $content = $parsed['items'][0]['properties']['content'][0]['html'];
+
+                $config = \HTMLPurifier_Config::createDefault();
+                $config->set('URI.Base', $url);
+                $config->set('URI.MakeAbsolute', true);
+                $config->set('HTML.Allowed', 'a[href],img[src],p,br');
+                $purifier = new \HTMLPurifier($config);
+                $content = $purifier->purify($content);
+
+                $parsed['items'][0]['properties']['content'][0]['html'] = $content;
+            }
+
+            return $parsed;
+        }
     }
+
 }
