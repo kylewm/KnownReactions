@@ -21,6 +21,9 @@ This software is dedicated to the public domain under Creative Commons [CC0][].
 
 ## Changelog
 
+- 0.1.5 - 2016-06-19: Use HTMLPurifier to clean up the
+  HTML we get from the mf-shim. Makes URLs absolute
+  and removes spurious classes
 - 0.1.4 - 2016-03-13: show title and description boxes
   even if there was an error fetching the source.
 - 0.1.3 - 2016-02-09: add argument drawSyndication call
