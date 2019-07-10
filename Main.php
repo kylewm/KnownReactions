@@ -53,13 +53,13 @@ namespace IdnoPlugins\Reactions {
         function registerPages()
         {
             parent::registerPages();
-            Idno::site()->addPageHandler('/indielike/edit/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
-            Idno::site()->addPageHandler('/indielike/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
-            Idno::site()->addPageHandler('/like/delete/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Delete');
-            Idno::site()->addPageHandler('/repost/edit/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
-            Idno::site()->addPageHandler('/repost/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
-            Idno::site()->addPageHandler('/repost/delete/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Delete');
-            Idno::site()->addPageHandler('/reactions/fetch/?', '\IdnoPlugins\Reactions\Pages\Fetch');
+            \Idno\Core\Idno::site()->routes()->addRoute('/indielike/edit/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
+            \Idno\Core\Idno::site()->routes()->addRoute('/indielike/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Like\Edit');
+            \Idno\Core\Idno::site()->routes()->addRoute('/like/delete/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Delete');
+            \Idno\Core\Idno::site()->routes()->addRoute('/repost/edit/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
+            \Idno\Core\Idno::site()->routes()->addRoute('/repost/edit/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Repost\Edit');
+            \Idno\Core\Idno::site()->routes()->addRoute('/repost/delete/(\w+)/?', '\IdnoPlugins\Reactions\Pages\Delete');
+            \Idno\Core\Idno::site()->routes()->addRoute('/reactions/fetch/?', '\IdnoPlugins\Reactions\Pages\Fetch');
 
         }
 
