@@ -3,6 +3,7 @@ namespace IdnoPlugins\Reactions\Pages {
 
     use Idno\Core\Idno;
     use Idno\Core\Webservice;
+    require_once __DIR__ . '/../autoloader.php';
 
     class Fetch extends \Idno\Common\Page {
 
