@@ -12,7 +12,7 @@ namespace IdnoPlugins\Reactions {
         function registerEventHooks()
         {
             parent::registerEventHooks();
-            Idno::site()->addEventHook('plugins/loaded', function (Event $evt) {
+            \Idno\Core\Idno::site()->events()->addListener('plugins/loaded', function (Event $evt) {
                 // make sure our content types are before IdnoPlugins\Like\ContentType
                 $bookmarkType = '\IdnoPlugins\Like\ContentType';
                 if (class_exists($bookmarkType)) {
@@ -43,7 +43,7 @@ namespace IdnoPlugins\Reactions {
                 }
             });
 
-            Idno::site()->addEventHook('share/types', function (Event $evt) {
+            \Idno\Core\Idno::site()->events()->addListener('share/types', function (Event $evt) {
                 $types = $evt->data()['types'];
                 $newTypes = ['like'=>'Like', 'repost'=>'Repost'];
                 $evt->setResponse(array_merge($types, $newTypes));
