@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "7cc9d9054e368174791d8973f32a7215",
     "content-hash": "0a12ddfa1d118b11fa243c17af4cfa7a",
     "packages": [
         {
@@ -45,7 +44,11 @@
                 }
             ],
             "description": "Cleans up microformats2 array structures",
-            "time": "2014-10-06 23:11:15"
+            "support": {
+                "issues": "https://github.com/barnabywalters/php-mf-cleaner/issues",
+                "source": "https://github.com/barnabywalters/php-mf-cleaner/tree/v0.1.4"
+            },
+            "time": "2014-10-06T23:11:15+00:00"
         },
         {
             "name": "mf2/mf2",
@@ -98,7 +101,11 @@
                 "parser",
                 "semantic"
             ],
-            "time": "2015-07-12 14:10:01"
+            "support": {
+                "issues": "https://github.com/indieweb/php-mf2/issues",
+                "source": "https://github.com/indieweb/php-mf2/tree/v0.2.12"
+            },
+            "time": "2015-07-12T14:10:01+00:00"
         },
         {
             "name": "mf2/shim",
@@ -153,15 +160,20 @@
                 "semantic",
                 "twitter"
             ],
-            "time": "2014-04-29 17:50:56"
+            "support": {
+                "issues": "https://github.com/indieweb/php-mf2-shim/issues",
+                "source": "https://github.com/indieweb/php-mf2-shim/tree/v0.2.4"
+            },
+            "time": "2014-04-29T17:50:56+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": []
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
