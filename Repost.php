@@ -55,7 +55,7 @@
                 return true;
             }
 
-            function save()
+            public function save($overrideAccess = false)
             {
                 // generate our own meaningful, unique(ish) slug
                 if (!$this->getSlug() && !$this->_id
@@ -63,7 +63,7 @@
                     $this->setSlugResilient($this->getTitle() . '-' . substr(md5($this->repostof), 0, 10));
                 }
 
-                return parent::save();
+                return parent::save($overrideAccess);
             }
 
         }
